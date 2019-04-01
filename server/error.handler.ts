@@ -16,6 +16,16 @@ export const handleError = (req: restfy.Request, resp: restfy.Response, err, don
 
         case 'ValidationError':
             err.statusCode = 400
+            const messages: any[] = []
+
+            for (let name in err.errors) {
+               messages.push({message: err.errors[name].message})
+            }
+
+            err.toJSON = () =>({
+                errors: messages
+            })
+
             break
     }
 
