@@ -39,7 +39,7 @@ class ModelRouter extends router_1.Router {
                     return this.model.findById(req.params.id);
                 }
                 else {
-                    throw new restify_errors_1.NotFoundError('Usuario não encontrado');
+                    throw new restify_errors_1.NotFoundError('Documento não encontrado');
                 }
             }).then(this.render(resp, next))
                 .catch(next);
@@ -51,14 +51,12 @@ class ModelRouter extends router_1.Router {
                 .catch(next);
         };
         this.delete = (req, resp, next) => {
-            this.model.remove({ _id: req.params.id })
-                .exec().then((cmdResutlt) => {
-                if (cmdResutlt.result.n) {
+            this.model.remove({ _id: req.params.id }).exec().then((cmdResult) => {
+                if (cmdResult.result.n) {
                     resp.send(204);
-                    return next();
                 }
                 else {
-                    throw new restify_errors_1.NotFoundError('Usuário não encontrado');
+                    throw new restify_errors_1.NotFoundError('Documento não encontrado');
                 }
                 return next();
             }).catch(next);
