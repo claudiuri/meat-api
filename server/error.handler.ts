@@ -23,6 +23,7 @@ export const handleError = (req: restfy.Request, resp: restfy.Response, err, don
             }
 
             err.toJSON = () =>({
+                message: 'Validation error while processing your request',
                 errors: messages
             })
 
