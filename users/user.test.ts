@@ -61,3 +61,36 @@ test('patch /users/:id', () =>{
         })
         .catch(fail)
 })
+
+test('findByEmail /users/', () =>{
+    return request(address)
+        .post('/users')
+        .send({
+            name: 'usuario2',
+            email: 'usuario2@email.com',
+            password: '123456'
+        })
+        .then(response => request(address)
+                            .get(`/users/`)
+                            .query({email: response.body.email}))
+        .then(response =>{
+            expect(response.status).toBe(200)
+        })
+        .catch(fail)
+})
+
+test('delete /users:/id', ()=>{
+    return request(address)
+              .post('/users')
+              .send({
+                name: 'usuario 3',
+                email: 'user3@gmail.com',
+                password: '123456',
+                cpf: '187.638.581-26'
+              }).then(response => request(address)
+                       .delete(`/users/${response.body._id}`))
+                .then(response=>{
+                  expect(response.status).toBe(204)
+             }).catch(fail)
+  
+})
