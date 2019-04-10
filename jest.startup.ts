@@ -4,9 +4,11 @@ import {environment} from './common/environment'
 
 import {usersRouter} from './users/users.router'
 import {reviewsRouter} from './reviews/reviews.router'
+import {restaurantsRouter} from './restaurants/restaurants.router'
 
 import {User} from './users/users.model'
 import {Review} from './reviews/reviews.model'
+import {Restaurant} from './restaurants/restaurants.model'
 
 let server: Server
 
@@ -16,10 +18,12 @@ const beforeAllTests = ( )=>{
     server = new Server()
     return server.bootstrap([
         usersRouter,
-        reviewsRouter
+        reviewsRouter,
+        restaurantsRouter
     ])
     .then(() => User.remove({}).exec())
     .then(() => Review.remove({}).exec())
+    .then(() => Restaurant.remove({}).exec())
 }
 
 const aterAllTests = () =>{
