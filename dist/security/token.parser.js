@@ -13,11 +13,12 @@ exports.tokenParser = (req, resp, next) => {
     }
 };
 function extractToken(req) {
+    //Authorization: Bearer TOKEN
     let token = undefined;
     const authorization = req.header('authorization');
     if (authorization) {
         const parts = authorization.split(' ');
-        if (parts.length === 2 && parts[0] == 'Bearer') {
+        if (parts.length === 2 && parts[0] === 'Bearer') {
             token = parts[1];
         }
     }
@@ -28,7 +29,8 @@ function applyBearer(req, next) {
         if (decoded) {
             users_model_1.User.findByEmail(decoded.sub).then(user => {
                 if (user) {
-                    req.authenticated = user;
+                    //associar o usuário no request
+                    req.authenticated = user; //
                 }
                 next();
             }).catch(next);

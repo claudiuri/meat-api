@@ -17,5 +17,5 @@ export const authenticate: restify.RequestHandler = (req, resp, next) =>{
             }else{
                 return next(new NotAuthorizedError('Invalid Credentials'))
             }
-        }).catch(next)
+    }).catch(next)
 }
