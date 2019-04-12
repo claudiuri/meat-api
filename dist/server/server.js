@@ -18,7 +18,7 @@ class Server {
             try {
                 this.application = restify.createServer({
                     name: 'meat-api',
-                    version: '1.0.0'
+                    version: '1.0.0',
                 });
                 this.application.use(restify.plugins.queryParser());
                 this.application.use(restify.plugins.bodyParser());

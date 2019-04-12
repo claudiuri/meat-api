@@ -1,4 +1,5 @@
 import * as restify from 'restify'
+import * as fs from 'fs'
 import * as mongoose from 'mongoose'
 
 import {environment} from '../common/environment'
@@ -24,7 +25,7 @@ export class Server {
 
         this.application = restify.createServer({
           name: 'meat-api',
-          version: '1.0.0'
+          version: '1.0.0',
         })
 
         this.application.use(restify.plugins.queryParser())

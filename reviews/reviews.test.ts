@@ -3,10 +3,12 @@ import * as request from 'supertest'
 import * as mongoose from 'mongoose'
 
 let address: string = (<any>global).address
+let auth: string = (<any>global).auth
 
 test('get /reviews', ()=>{
   return request(address)
     .get('/reviews')
+    .set('Authorization', auth)
     .then(response =>{
         expect(response.status).toBe(200)
         expect(response.body.items).toBeInstanceOf(Array)
@@ -16,6 +18,7 @@ test('get /reviews', ()=>{
 test('post /reviews', ()=>{
   return request(address)
             .post('/reviews')
+            .set('Authorization', auth)
             .send({
               date: '2019-04-08T23:10:10',
               rating: 3,
@@ -37,6 +40,7 @@ test('post /reviews', ()=>{
 test('get /reviews/aaaaa - not found', ()=>{
   return request(address)
          .get('/reviews/aaaaa')
+         .set('Authorization', auth)
          .then(response=>{
            expect(response.status).toBe(404)
          })
