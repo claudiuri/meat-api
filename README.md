@@ -2,7 +2,7 @@
 
 Uma api para restaurantes
 
-### Pré-srequisitos
+### Pré-requisitos
 
 Para você executar o projeto é necessário que o Node.js e o MongoDB estejam instalados em sua máquina
 
